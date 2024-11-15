@@ -1,8 +1,13 @@
 import { useContext } from "react";
 import { AuthContext } from "../components/provider/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
- const {signIn} = useContext(AuthContext)  
+ const {signIn , signInWithGoogle } = useContext(AuthContext)
+ const navigate = useNavigate();
+
+ console.log(location);
+
   const hanleSignIn = event =>{
     event.preventDefault();
     const form = event.target;
@@ -13,6 +18,7 @@ const Login = () => {
     signIn(email, password)
     .then((result) => {
       const user = result.user;
+      navigate('/')
       console.log(user);
     })
     .catch((error) => {
@@ -22,8 +28,27 @@ const Login = () => {
     });
 
   }
+
+  const handleGoogleSignUp = () => {
+    signInWithGoogle()
+    .then((result) => {
+      const user = result.user;
+      console.log("user from google signUp ", user);
+      if (user) {
+        navigate(location?.state ? location?.state : "/");
+      }
+    })
+    .catch((error) => {
+      const errorMessage = error.message;
+      console.error(errorMessage);
+    });
+
+  }
+
+
+
   return (
-    <div className=" mx-auto w-full max-w-md p-8 space-y-3 rounded-xl bg-gray-50 text-gray-800">
+    <div className="mx-auto w-full max-w-md p-8 space-y-3 rounded-xl bg-gray-50 text-gray-800 my-16">
       <h1 className="mb-3 text-4xl font-serif text-center">Login</h1>
       <form onSubmit={hanleSignIn} noValidate="" action="" className="space-y-6">
         <div className="space-y-1 text-sm">
@@ -67,7 +92,8 @@ const Login = () => {
       <div className="my-6 space-y-4">
         <button
           aria-label="Login with Google"
-          type="button"
+          type="submit"
+          onClick={handleGoogleSignUp}
           className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 border-gray-600 focus:ring-violet-600"
         >
           <svg
@@ -84,7 +110,7 @@ const Login = () => {
         Do not have an account?
         <a
           rel="noopener noreferrer"
-          href="#"
+          href="/SignUp"
           className="underline text-gray-800"
         >
           Sign up

@@ -1,16 +1,13 @@
-
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../components/provider/AuthProvider";
-
+import Swal from "sweetalert2";
 
 const SignUp = () => {
+  const { createUser, updateUserProfile, setUser, signInWithGoogle } =
+    useContext(AuthContext);
 
-  const {createUser , updateUserProfile} = useContext(AuthContext)
-  
-  console.log(createUser);
-
-  const handleSignUp = event => {
+  const handleSignUp = (event) => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
@@ -19,38 +16,58 @@ const SignUp = () => {
     const password = form.password.value;
     //console.log(name , email , photo , password);
     //console.log('rabbi');
-    createUser(email, password)
+    const result = createUser(email, password)
+      .then((User) => {
+        const user = User.user;
+        console.log(user);
+        updateUserProfile(name, photo)
+          .then(() => {
+            console.log("profile updated");
+            setUser({ ...result.user, photoURL: photo, displayName: name });
+            Swal.fire({
+              title: "Good job!",
+              text: "Thanks for signing up. Welcome to our community!",
+              icon: "success",
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong!",
+            });
+          });
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        // ..
+      });
+  };
 
-    .then((User) => {
-      // Signed up 
-      const user = User.user;
-      console.log(user);
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
-      // ..
-    });
-
-    updateUserProfile(name, photo)
-    .then(() => {
-      console.log("profile updated");
-      // ...
-    }).catch((error) => {
-console.log(error);
-    })
-  }
- 
-
+  const handleGoogleSignUp = () => {
+    console.log("handleGoogleSignUp");
+    signInWithGoogle()
+      .then((result) => {
+        const user = result.user;
+        console.log("user from google signUp ", user);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.error(errorMessage);
+      });
+  };
   return (
     <div className=" mx-auto w-full max-w-md p-4 rounded-md shadow sm:p-8 bg-gray-50 text-gray-800">
       <h2 className="mb-3 text-5xl font-serif text-center">Sign Up</h2>
       <div className="my-6 space-y-4">
         <button
+          onClick={handleGoogleSignUp}
           aria-label="Login with Google"
-          type="button"
+          type="submit"
           className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 border-gray-600 focus:ring-violet-600"
         >
           <svg
@@ -130,7 +147,7 @@ console.log(error);
         <h1 className="text-right text-xl hover:underline text-gray-600">
           Already member?{" "}
           <span className=" mx-4 text-red-800">
-         <Link to="/login">Sign in</Link>
+            <Link to="/login">Sign in</Link>
           </span>
         </h1>
       </form>

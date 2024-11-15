@@ -2,38 +2,26 @@ import { Link } from "react-router-dom";
 import logo from "../assets/images/radiant.jpg";
 import { useContext } from "react";
 import { AuthContext } from "./provider/AuthProvider";
-const NavBar = () => {
-  const {user , logout} = useContext(AuthContext)
-  console.log("coming from navbar", user);
 
-  const signOut = () =>{
+const NavigationBar = () => {
+  const { user, logout } = useContext(AuthContext);
+  console.log(user);
+  //console.log("coming from navbar", user.displayName , user.photoURL);
+
+  const signOut = () => {
     logout()
-    .then(() => {
-   console.log(" // Sign-out successful.");  
-    }).catch((error) => {
-      console.error(error)
-    });
-    
-  } 
+      .then(() => {
+        console.log(" // Sign-out successful.");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
-
-  const listItems = 
-    <>
-      <li>
-      <Link to="/">Home</Link>
-      </li>
-      <li>
-      <Link to="/login">FAQ</Link>
-      </li>
-      <li>
-      <Link to="/SignUp">About</Link>
-      </li>
-    </>
-  
   return (
-    <div className="md:mx-96">
-      <div className="navbar bg-base-100">
-        <div className="navbar-start">
+    <div>
+      <div className="navbar bg-base-100 border">
+        <div className="navbar-start ">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
@@ -55,11 +43,38 @@ const NavBar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-                {listItems}
+              <li>
+                <Link>Home</Link>
+              </li>
+              <li>
+                <Link>Services</Link>
+              </li>{
+                user &&               <li>
+                <a>Dashboard</a>
+                <ul className="p-2">
+                  <li>
+                    <Link>Add Service</Link>
+                  </li>
+                  <li>
+                    <Link>Manage Service</Link>
+                  </li>
+                  <li>
+                    <Link>Booked-Services</Link>
+                  </li>
+                  <li>
+                    <Link>Service-To-Do</Link>
+                  </li>
+                </ul>
+              </li>
+              }
+
+              <li>
+                <a>Item 3</a>
+              </li>
             </ul>
           </div>
-          <div className=" flex-1 ml-2">
-            <div className="flex gap-2 items-center">
+          <div className="flex-1 ml-4">
+            <div className="flex gap-2 items-center md:ml-64">
               <Link to={"/"}>
                 <img className="w-auto h-9" src={logo} alt="logo image" />
               </Link>
@@ -71,10 +86,38 @@ const NavBar = () => {
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-    {listItems}
+            <li>
+              <Link>Home</Link>
+            </li>
+            <li>
+              <Link>Services</Link>
+            </li>
+            { user&&             <li>
+              <details>
+                <summary>&nbsp; &nbsp; Dashboard &nbsp; &nbsp;</summary>
+                <ul className="p-2 space-y-2">
+                  <li>
+                    <Link to="addService">Add Service</Link>
+                  </li>
+                  <li>
+                    <Link>Manage Service</Link>
+                  </li>
+                  <li>
+                    <Link>Booked Service</Link>
+                  </li>
+                  <li>
+                    <Link>Service-To-Do</Link>
+                  </li>
+                </ul>
+              </details>
+            </li>}
+
+            <li>
+              <a>Item 3</a>
+            </li>
           </ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end md:mr-64">
           {user ? (
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -84,6 +127,7 @@ const NavBar = () => {
                       user?.photoURL ||
                       "https://i.ibb.co/88cC8TK/Profile-Photo.jpg"
                     }
+                    alt={user?.displayName}
                   />
                 </div>
               </label>
@@ -102,6 +146,10 @@ const NavBar = () => {
                   </button>
                 </li>
               </ul>
+
+              {/* this is testing purpose */}
+
+              {/* this is testing purpose */}
             </div>
           ) : (
             <Link to="/login">
@@ -114,4 +162,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default NavigationBar;
