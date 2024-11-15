@@ -1,11 +1,24 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/images/radiant.jpg";
+import { useContext } from "react";
+import { AuthContext } from "./provider/AuthProvider";
 const NavBar = () => {
+  const {user , logout} = useContext(AuthContext)
+  console.log("coming from navbar", user);
+
+  const signOut = () =>{
+    logout()
+    .then(() => {
+   console.log(" // Sign-out successful.");  
+    }).catch((error) => {
+      console.error(error)
+    });
+    
+  } 
+
+
   const listItems = 
     <>
-   
-   
-
       <li>
       <Link to="/">Home</Link>
       </li>
@@ -62,7 +75,39 @@ const NavBar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-        <button className="btn btn-primary">Login</button>
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full">
+                  <img
+                    src={
+                      user?.photoURL ||
+                      "https://i.ibb.co/88cC8TK/Profile-Photo.jpg"
+                    }
+                  />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <button className="btn btn-sm  btn-ghost">
+                    {user?.displayName || "user name not found"}
+                  </button>
+                </li>
+                <li>
+                  <button onClick={signOut} className="btn btn-sm  btn-ghost">
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <Link to="/login">
+              <button className="btn btn-sm  btn-ghost">Login</button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

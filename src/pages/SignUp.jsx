@@ -6,7 +6,7 @@ import { AuthContext } from "../components/provider/AuthProvider";
 
 const SignUp = () => {
 
-  const {createUser} = useContext(AuthContext)
+  const {createUser , updateUserProfile} = useContext(AuthContext)
   
   console.log(createUser);
 
@@ -15,14 +15,15 @@ const SignUp = () => {
     const form = event.target;
     const name = form.name.value;
     const email = form.email.value;
-    const photUrl = form.photUrl.value;
+    const photo = form.photUrl.value;
     const password = form.password.value;
-    console.log(name , email , photUrl , password);
-    console.log('rabbi');
+    //console.log(name , email , photo , password);
+    //console.log('rabbi');
     createUser(email, password)
-    .then((result) => {
+
+    .then((User) => {
       // Signed up 
-      const user = result.user;
+      const user = User.user;
       console.log(user);
       // ...
     })
@@ -32,8 +33,16 @@ const SignUp = () => {
       console.log(errorCode, errorMessage);
       // ..
     });
+
+    updateUserProfile(name, photo)
+    .then(() => {
+      console.log("profile updated");
+      // ...
+    }).catch((error) => {
+console.log(error);
+    })
   }
-  
+ 
 
   return (
     <div className=" mx-auto w-full max-w-md p-4 rounded-md shadow sm:p-8 bg-gray-50 text-gray-800">
