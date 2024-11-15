@@ -1,8 +1,15 @@
 
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../components/provider/AuthProvider";
+
 
 const SignUp = () => {
+
+  const {createUser} = useContext(AuthContext)
   
+  console.log(createUser);
+
   const handleSignUp = event => {
     event.preventDefault();
     const form = event.target;
@@ -10,9 +17,21 @@ const SignUp = () => {
     const email = form.email.value;
     const photUrl = form.photUrl.value;
     const password = form.password.value;
-
     console.log(name , email , photUrl , password);
     console.log('rabbi');
+    createUser(email, password)
+    .then((result) => {
+      // Signed up 
+      const user = result.user;
+      console.log(user);
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+      // ..
+    });
   }
   
 

@@ -18,7 +18,7 @@ const NavBar = () => {
     </>
   
   return (
-    <div className="mx-auto">
+    <div className="md:mx-96">
       <div className="navbar bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
@@ -62,7 +62,7 @@ const NavBar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
+        <button className="btn btn-primary">Login</button>
         </div>
       </div>
     </div>
