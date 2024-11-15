@@ -1,67 +1,79 @@
+import { useContext } from "react";
+import { AuthContext } from "../../components/provider/AuthProvider";
+
 const AddService = () => {
+    const {user} = useContext(AuthContext)
+    const handleAddService = (e) => {
+        e.preventDefault()
+        const form = e.target;
+        const imageUrl = form.imageUrl.value;
+		const name = form.name.value
+		const price = form.price.value
+		const area = form.area.value
+		const Description = form.Description.value
+       
+
+		const service = {
+			imageUrl,
+			name,
+			price,
+			area,
+			Description
+		}
+
+		console.log(service);
+    }
     return (
         <div>
             <section className="p-6 bg-gray-100 text-gray-900">
-	<form noValidate="" action="" className="container flex flex-col mx-auto space-y-12">
+	<form onSubmit={handleAddService} className="container flex flex-col mx-auto space-y-12">
 		<fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-gray-50">
 			<div className="space-y-2 col-span-full lg:col-span-1">
-				<p className="font-medium">Personal Inormation</p>
-				<p className="text-xs">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci fuga autem eum!</p>
+            <h1 className=" text-4xl font-serif">Add a Service</h1>
 			</div>
 			<div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
-				<div className="col-span-full sm:col-span-3">
-					<label htmlFor="firstname" className="text-sm">First name</label>
-					<input id="firstname" type="text" placeholder="First name" className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-600 border-gray-300" />
+            <div className="col-span-full">
+					<label  className="text-xl font-semibold ">Image URL of the Service</label>
+					<textarea name="imageUrl" id="bio" placeholder="" className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-600 border-gray-300"></textarea>
+				</div>
+                <div className="col-span-full">
+					<label  className="text-xl font-semibold">Service Name</label>
+					<input name="name"  type="text" placeholder="" className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-600 border-gray-300" />
 				</div>
 				<div className="col-span-full sm:col-span-3">
-					<label htmlFor="lastname" className="text-sm">Last name</label>
-					<input id="lastname" type="text" placeholder="Last name" className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-600 border-gray-300" />
+					<label  className="text-xl font-semibold">Price</label>
+					<input name="price" type="text" placeholder="Price" className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-600 border-gray-300" />
 				</div>
 				<div className="col-span-full sm:col-span-3">
-					<label htmlFor="email" className="text-sm">Email</label>
-					<input id="email" type="email" placeholder="Email" className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-600 border-gray-300" />
+					<label  className="text-xl font-semibold">Service Area</label>
+					<input name="area" type="text" placeholder="Service Area" className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-600 border-gray-300" />
 				</div>
 				<div className="col-span-full">
-					<label htmlFor="address" className="text-sm">Address</label>
-					<input id="address" type="text" placeholder="" className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-600 border-gray-300" />
+					<label  className="text-xl font-semibold">Description</label>
+					<input name="Description" type="text" placeholder="" className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-600 border-gray-300" />
 				</div>
-				<div className="col-span-full sm:col-span-2">
-					<label htmlFor="city" className="text-sm">City</label>
-					<input id="city" type="text" placeholder="" className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-600 border-gray-300" />
-				</div>
-				<div className="col-span-full sm:col-span-2">
-					<label htmlFor="state" className="text-sm">State / Province</label>
-					<input id="state" type="text" placeholder="" className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-600 border-gray-300" />
-				</div>
-				<div className="col-span-full sm:col-span-2">
-					<label htmlFor="zip" className="text-sm">ZIP / Postal</label>
-					<input id="zip" type="text" placeholder="" className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-600 border-gray-300" />
-				</div>
+
 			</div>
 		</fieldset>
 		<fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-gray-50">
 			<div className="space-y-2 col-span-full lg:col-span-1">
-				<p className="font-medium">Profile</p>
-				<p className="text-xs">Adipisci fuga autem eum!</p>
+				<p className="font-medium text-xl">Added By</p>
+				
 			</div>
 			<div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
 				<div className="col-span-full sm:col-span-3">
-					<label htmlFor="username" className="text-sm">Username</label>
-					<input id="username" type="text" placeholder="Username" className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-600 border-gray-300" />
+					<label htmlFor="username" className="text-xl font-semibold">Username</label>
+					<input id="username" type="text" value={user?.displayName} className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-600 border-gray-300" />
 				</div>
 				<div className="col-span-full sm:col-span-3">
-					<label htmlFor="website" className="text-sm">Website</label>
-					<input id="website" type="text" placeholder="https://" className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-600 border-gray-300" />
+					<label  className="text-xl font-semibold">Email</label>
+					<input id="website" type="text" value={user?.email} className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-600 border-gray-300" />
 				</div>
+
 				<div className="col-span-full">
-					<label htmlFor="bio" className="text-sm">Bio</label>
-					<textarea id="bio" placeholder="" className="w-full rounded-md focus:ring focus:ring-opacity-75 text-gray-900 focus:ring-violet-600 border-gray-300"></textarea>
-				</div>
-				<div className="col-span-full">
-					<label htmlFor="bio" className="text-sm">Photo</label>
+		
 					<div className="flex items-center space-x-2">
-						<img src="https://source.unsplash.com/30x30/?random" alt="" className="w-10 h-10 bg-gray-500 rounded-full bg-gray-300" />
-						<button type="button" className="px-4 py-2 border rounded-md border-gray-800">Change</button>
+                        <button type="submit" className="btn btn-block bg-blue-600 text-white hover:bg-blue-200 hover:text-black font-bold text-xl">Add</button>
 					</div>
 				</div>
 			</div>
