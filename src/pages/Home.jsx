@@ -1,9 +1,14 @@
+import Package from "../components/package/Package";
+import Slider from "../components/Slider/Slider";
+
 
 
 const Home = () => {
+  
     return (
         <div>
-            <h1>IM FROM HOME</h1>
+         <Slider />
+        <Package />
         </div>
     );
 };

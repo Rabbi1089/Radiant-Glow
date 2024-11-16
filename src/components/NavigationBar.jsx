@@ -41,7 +41,7 @@ const NavigationBar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[10] mt-3 w-52 p-2 shadow"
             >
               <li>
                 <Link>Home</Link>
@@ -84,7 +84,7 @@ const NavigationBar = () => {
             </div>
           </div>
         </div>
-        <div className="navbar-center hidden lg:flex">
+        <div className="navbar-center hidden lg:flex relative z-50">
           <ul className="menu menu-horizontal px-1">
             <li>
               <Link>Home</Link>
@@ -117,7 +117,7 @@ const NavigationBar = () => {
             </li>
           </ul>
         </div>
-        <div className="navbar-end md:mr-64">
+        <div className="navbar-end md:mr-64 relative z-50">
           {user ? (
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -146,10 +146,6 @@ const NavigationBar = () => {
                   </button>
                 </li>
               </ul>
-
-              {/* this is testing purpose */}
-
-              {/* this is testing purpose */}
             </div>
           ) : (
             <Link to="/login">

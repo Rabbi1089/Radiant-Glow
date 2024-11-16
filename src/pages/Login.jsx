@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import { AuthContext } from "../components/provider/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import UseAuth from "../hooks/useAuth/UseAuth";
 
 const Login = () => {
- const {signIn , signInWithGoogle } = useContext(AuthContext)
+ const {signIn , signInWithGoogle } = UseAuth()
  const navigate = useNavigate();
 
  console.log(location);
