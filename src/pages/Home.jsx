@@ -1,5 +1,6 @@
 import Package from "../components/package/Package";
 import Slider from "../components/Slider/Slider";
+import TrendingService from "../components/trendingService/TrendingService";
 
 
 
@@ -9,6 +10,7 @@ const Home = () => {
         <div>
          <Slider />
         <Package />
+        <TrendingService />
         </div>
     );
 };

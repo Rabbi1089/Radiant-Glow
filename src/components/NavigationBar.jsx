@@ -47,7 +47,7 @@ const NavigationBar = () => {
                 <Link>Home</Link>
               </li>
               <li>
-                <Link>Services</Link>
+                <Link to="/allServices">Services</Link>
               </li>{
                 user &&               <li>
                 <a>Dashboard</a>
@@ -56,7 +56,7 @@ const NavigationBar = () => {
                     <Link>Add Service</Link>
                   </li>
                   <li>
-                    <Link>Manage Service</Link>
+                    <Link to="/popularService">popularService</Link>
                   </li>
                   <li>
                     <Link>Booked-Services</Link>
@@ -90,7 +90,7 @@ const NavigationBar = () => {
               <Link>Home</Link>
             </li>
             <li>
-              <Link>Services</Link>
+            <Link to="/allServices">Services</Link>
             </li>
             { user&&             <li>
               <details>
@@ -100,7 +100,7 @@ const NavigationBar = () => {
                     <Link to="addService">Add Service</Link>
                   </li>
                   <li>
-                    <Link>Manage Service</Link>
+                    <Link to="popularService">popular Service</Link>
                   </li>
                   <li>
                     <Link>Booked Service</Link>

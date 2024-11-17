@@ -1,8 +1,10 @@
 import axios from "axios";
 import UseAuth from "../../hooks/useAuth/UseAuth";
+import Swal from "sweetalert2";
 
 const AddService = () => {
   const { user } = UseAuth();
+  console.log('print from add a service',user);
   const handleAddService = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -28,6 +30,12 @@ const AddService = () => {
     axios.post("http://localhost:5000/services", service , { withCredentials: true})
 	.then(function (response) {
 		console.log(response);
+
+    Swal.fire({
+      title: "Good job!",
+      text: "Service added",
+      icon: "success",
+    });
 	  })
 	  .catch(function (error) {
 		console.log(error);
@@ -59,7 +67,7 @@ const AddService = () => {
               </div>
               <div className="col-span-full">
                 <label className="text-xl font-semibold">Service Name</label>
-                <input
+                <textarea
                   name="name"
                   type="text"
                   placeholder=""
@@ -86,7 +94,7 @@ const AddService = () => {
               </div>
               <div className="col-span-full">
                 <label className="text-xl font-semibold">Description</label>
-                <input
+                <textarea
                   name="Description"
                   type="text"
                   placeholder=""
