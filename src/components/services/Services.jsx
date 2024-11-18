@@ -1,10 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Services = ({ service }) => {
   const text = service.Description;
-  const result = text.substring(0,100);
-
-
+  const result = text.substring(0, 100);
 
   return (
     <div className="max-w-lg p-4 shadow-md bg-gray-50 text-gray-800 mx-auto hover:">
@@ -23,17 +22,17 @@ const Services = ({ service }) => {
             </h3>
           </a>
           <div className=" my-8 border">
-          <p className="leading-snug text-xl text-gray-600">
-          <span className=""> {result}</span>
-         
-          </p>
+            <p className="leading-snug text-xl text-gray-600">
+              <span className=""> {result}</span>
+            </p>
           </div>
- 
         </div>
       </div>
 
       <div className="flex  justify-between p-2 mt-24 space-x-4 ">
-        <div className="justify-start flex items-center text-2xl font-serif">৳ {service.price}</div>
+        <div className="justify-start flex items-center text-2xl font-serif">
+          ৳ {service.price}
+        </div>
 
         <div>
           {" "}
@@ -51,15 +50,19 @@ const Services = ({ service }) => {
             alt=""
             className="w-12 h-12 rounded-lg bg-gray-500"
           />
-          <h2 className="text-xl font-semibold">{service.serviceProvider.serviceProviderName}</h2>
+          <h2 className="text-xl font-semibold">
+            {service.serviceProvider.serviceProviderName}
+          </h2>
         </div>
       </div>
-      <button
-        type="button"
-        className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md bg-violet-600 text-gray-50"
-      >
-        Read more
-      </button>
+      <Link to={`/Services/${service._id}`}>
+        <button
+          type="button"
+          className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md bg-violet-600 text-gray-50"
+        >
+          Read more
+        </button>
+      </Link>
     </div>
   );
 };

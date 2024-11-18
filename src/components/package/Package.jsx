@@ -2,7 +2,7 @@ import React from "react";
 
 const Package = () => {
   return (
-    <section className="py-20 text-gray-800">
+    <section className="py-20 text-gray-800 px-4 lg:px-0">
       <div className="container px-4 mx-auto">
         <div className="max-w-2xl mx-auto mb-16 text-center">
           <span className="font-bold tracking-wider uppercase text-violet-600">
