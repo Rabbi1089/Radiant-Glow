@@ -21,7 +21,7 @@ const Services = ({ service }) => {
               {service.name}
             </h3>
           </a>
-          <div className=" my-8 border">
+          <div className=" my-8">
             <p className="leading-snug text-xl text-gray-600">
               <span className=""> {result}</span>
             </p>
