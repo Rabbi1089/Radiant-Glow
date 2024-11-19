@@ -53,13 +53,13 @@ const NavigationBar = () => {
                 <a>Dashboard</a>
                 <ul className="p-2">
                   <li>
-                    <Link>Add Service</Link>
+                  <Link to="addService">Add Service</Link>
                   </li>
                   <li>
                     <Link to="/popularService">popularService</Link>
                   </li>
                   <li>
-                    <Link>Booked-Services</Link>
+                  <Link to="/manageService">Manage Services</Link>
                   </li>
                   <li>
                     <Link>Service-To-Do</Link>
@@ -103,7 +103,7 @@ const NavigationBar = () => {
                     <Link to="popularService">popular Service</Link>
                   </li>
                   <li>
-                    <Link>Booked Service</Link>
+                    <Link to="manageService">Manage Services</Link>
                   </li>
                   <li>
                     <Link>Service-To-Do</Link>
