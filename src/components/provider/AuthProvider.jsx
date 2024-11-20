@@ -10,6 +10,7 @@ import {
   GoogleAuthProvider 
 } from "firebase/auth";
 import { app } from "../../firebase/firebase.config";
+import axios from "axios";
 
 
 export const AuthContext = createContext();
@@ -44,11 +45,15 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider)
   }
 
-const logout = () => {
+
+const logout = async () => {
   setLoading(true)
+  const { data } = await axios("http://localhost:5000/logout", {
+    withCredentials: true,
+  })
+  console.log(data)
   return signOut(auth)
 }
-
 
   // onAuthStateChange
   useEffect(() => {
