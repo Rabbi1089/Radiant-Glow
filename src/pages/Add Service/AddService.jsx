@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 
 const AddService = () => {
   const { user } = UseAuth();
-  console.log('print from add a service',user);
+  console.log("print from add a service", user);
   const handleAddService = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -27,19 +27,22 @@ const AddService = () => {
       },
     };
 
-    axios.post("http://localhost:5000/services", service , { withCredentials: true})
-	.then(function (response) {
-		console.log(response);
-
-    Swal.fire({
-      title: "Good job!",
-      text: "Service added",
-      icon: "success",
-    });
-	  })
-	  .catch(function (error) {
-		console.log(error);
-	  })
+    axios
+      .post("http://localhost:5000/services", service, {
+        withCredentials: true,
+      })
+      .then(function (response) {
+        console.log(response);
+        form.reset()
+        Swal.fire({
+          title: "Good job!",
+          text: "Service added",
+          icon: "success",
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     console.log(service);
   };
   return (

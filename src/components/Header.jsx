@@ -10,7 +10,7 @@ const Header = () => {
             Up-to 20% discounts on Facial! Limited slots left in your area today
           </span>
         </marquee>
-        <div className=" mx-6 w-1/4">
+        <div className="lg:mx-6 w-1/4 text-sm lg:text-xl">
           <h1>Call for Booking +880 9613224433</h1>
         </div>
       </div>
