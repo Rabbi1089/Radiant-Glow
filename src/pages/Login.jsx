@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import UseAuth from "../hooks/useAuth/UseAuth";
+import axios from "axios";
 
 const Login = () => {
  const {signIn , signInWithGoogle } = UseAuth()
@@ -16,9 +17,12 @@ const Login = () => {
     console.log(email, password)
     signIn(email, password)
     .then((result) => {
-      const user = result.user;
+      const loggedUser = result.user;
+      const user = {email}
+      axios.post("http://localhost:5000/jwt", user , {withCredentials : true})
+    .then(res => console.log( res.data))
       navigate('/')
-      console.log(user);
+      console.log(loggedUser);
     })
     .catch((error) => {
       const errorCode = error.code;
