@@ -1,10 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import UseAuth from "../../hooks/useAuth/UseAuth";
+import { Link } from "react-router-dom";
 
 const ManageService = () => {
   const { user } = UseAuth();
   const [myServices, setMyServices] = useState([]);
+  console.log("fro manage service", user.email);
+  console.log("fro manage service", myServices);
 
   useEffect(() => {
     getData();
@@ -12,12 +15,14 @@ const ManageService = () => {
 
   const getData = () => {
     axios
-      .get(`http://localhost:5000/myService?email=${user?.email}`)
-      .then(res => setMyServices(res.data))
-   
+      .get(`http://localhost:5000/myService?email=${user?.email}`, {
+        withCredentials: true,
+      })
+      .then((res) => setMyServices(res.data));
   };
 
-  console.log('comes from myservice',myServices);
+
+  console.log("comes from myservice", myServices);
   return (
     <div className="overflow-x-auto lg:mx-40">
       <table className="table">
@@ -26,32 +31,45 @@ const ManageService = () => {
           <tr>
             <th></th>
             <th>Name</th>
-            <th>Job</th>
-            <th>Favorite Color</th>
+            <th>Price</th>
+            <th>Area</th>
+            <th>&nbsp; &nbsp; Action</th>
           </tr>
         </thead>
         <tbody>
-          {/* row 1 */}
-          <tr>
-            <th>1</th>
-            <td>Cy Ganderton</td>
-            <td>Quality Control Specialist</td>
-            <td>Blue</td>
-          </tr>
-          {/* row 2 */}
-          <tr>
-            <th>2</th>
-            <td>Hart Hagerty</td>
-            <td>Desktop Support Technician</td>
-            <td>Purple</td>
-          </tr>
-          {/* row 3 */}
-          <tr>
-            <th>3</th>
-            <td>Brice Swyre</td>
-            <td>Tax Accountant</td>
-            <td>Red</td>
-          </tr>
+          {myServices.map((service, idx) => (
+            <tr key={idx}>
+              {" "}
+              <th>{idx + 1}</th>
+              <td>{service.name}</td>
+              <td>{service.price}</td>
+              <td>{service.area}</td>
+              <td>
+                <div className=" flex gap-2">
+                <Link to={`/updateService/${service._id}`}>
+                <button className="btn btn-sm">update</button>
+                </Link>
+                 
+                  <button className="btn btn-sm text-red-700 hover:bg-red-300">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import UseAuth from "../../hooks/useAuth/UseAuth";
 import axios from "axios";
@@ -106,6 +105,7 @@ const ServiceDetails = () => {
               ৳ {sDetails.price}
             </a>
           </div>
+          {/* modal started */}
           <a rel="noopener noreferrer" href="#">
             {/* Open the modal using document.getElementById('ID').showModal() method */}
             <button
@@ -215,6 +215,7 @@ const ServiceDetails = () => {
               </div>
             </dialog>
           </a>
+          {/* modal end */}
         </div>
       </div>
     </div>
