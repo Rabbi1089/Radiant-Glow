@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import UseAuth from "../../hooks/useAuth/UseAuth";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ManageService = () => {
   const { user } = UseAuth();
@@ -21,6 +22,55 @@ const ManageService = () => {
       .then((res) => setMyServices(res.data));
   };
 
+    const handleDelete = (id) => {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success",
+          cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
+      });
+      swalWithBootstrapButtons.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios
+          .delete(`http://localhost:5000/delete/${id}`)
+          .then(function (response) {
+            console.log(response);
+            getData()
+            swalWithBootstrapButtons.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success"
+            });
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire({
+            title: "Cancelled",
+            text: "Your imaginary file is safe :)",
+            icon: "error"
+          });
+        }
+      });
+
+
+    
+  
+    }
 
   console.log("comes from myservice", myServices);
   return (
@@ -50,7 +100,7 @@ const ManageService = () => {
                 <button className="btn btn-sm">update</button>
                 </Link>
                  
-                  <button className="btn btn-sm text-red-700 hover:bg-red-300">
+                  <button onClick={() => {handleDelete(service._id)}} className="btn btn-sm text-red-700 hover:bg-red-300">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-6 w-6"
