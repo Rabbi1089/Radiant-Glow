@@ -12,7 +12,7 @@ const NavigationBar = () => {
   const signOut = () => {
     logout()
       .then(() => {
-        navigate('/')
+        navigate("/");
         console.log(" // Sign-out successful.");
       })
       .catch((error) => {
@@ -50,25 +50,27 @@ const NavigationBar = () => {
               </li>
               <li>
                 <Link to="/allServices">Services</Link>
-              </li>{
-                user &&               <li>
-                <a>Dashboard</a>
-                <ul className="p-2">
-                  <li>
-                  <Link to="addService">Add Service</Link>
-                  </li>
-                  <li>
-                    <Link to="/popularService">popularService</Link>
-                  </li>
-                  <li>
-                  <Link to="/manageService">Manage Services</Link>
-                  </li>
-                  <li>
-                    <Link to="bookedService">Booked Service</Link>
-                  </li>
-                </ul>
               </li>
-              }
+              {user && (
+                <li>
+                  <a>Dashboard</a>
+                  <ul className="p-2">
+                    <li>
+                      <Link to="addService">Add Service</Link>
+                    </li>
+
+                    <li>
+                      <Link to="/manageService">Manage Services</Link>
+                    </li>
+                    <li>
+                      <Link to="bookedService">Booked Service</Link>
+                    </li>
+                    <li>
+                      <Link to="ServiceToDo">Service To Do</Link>
+                    </li>
+                  </ul>
+                </li>
+              )}
 
               <li>
                 <a>Item 3</a>
@@ -92,29 +94,29 @@ const NavigationBar = () => {
               <Link>Home</Link>
             </li>
             <li>
-            <Link to="/allServices">Services</Link>
+              <Link to="/allServices">Services</Link>
             </li>
-            { user&&             <li>
-              <details>
-                <summary>&nbsp; &nbsp; Dashboard &nbsp; &nbsp;</summary>
-                <ul className="p-2 space-y-2">
-                  <li>
-                    <Link to="addService">Add Service</Link>
-                  </li>
-                  <li>
-                    <Link to="popularService">popular Service</Link>
-                  </li>
-                  <li>
-                    <Link to="manageService">Manage Services</Link>
-                  </li>
-                  <li>
-           
-                    <Link to="bookedService">Booked Service</Link>
-                  </li>
-       
-                </ul>
-              </details>
-            </li>}
+            {user && (
+              <li>
+                <details>
+                  <summary>&nbsp; &nbsp; Dashboard &nbsp; &nbsp;</summary>
+                  <ul className="p-2 space-y-2">
+                    <li>
+                      <Link to="addService">Add Service</Link>
+                    </li>
+                    <li>
+                      <Link to="manageService">Manage Services</Link>
+                    </li>
+                    <li>
+                      <Link to="bookedService">Booked Service</Link>
+                    </li>
+                    <li>
+                      <Link to="ServiceToDo">Service To Do</Link>
+                    </li>
+                  </ul>
+                </details>
+              </li>
+            )}
 
             <li>
               <a>Item 3</a>
