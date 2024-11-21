@@ -7,9 +7,6 @@ import Swal from "sweetalert2";
 const ManageService = () => {
   const { user } = UseAuth();
   const [myServices, setMyServices] = useState([]);
-  console.log("fro manage service", user.email);
-  console.log("fro manage service", myServices);
-
   useEffect(() => {
     getData();
   }, [user]);

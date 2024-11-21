@@ -1,16 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/images/radiant.jpg";
 import { useContext } from "react";
 import { AuthContext } from "./provider/AuthProvider";
 
 const NavigationBar = () => {
   const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
   console.log(user);
   //console.log("coming from navbar", user.displayName , user.photoURL);
 
   const signOut = () => {
     logout()
       .then(() => {
+        navigate('/')
         console.log(" // Sign-out successful.");
       })
       .catch((error) => {
@@ -62,7 +64,7 @@ const NavigationBar = () => {
                   <Link to="/manageService">Manage Services</Link>
                   </li>
                   <li>
-                    <Link>Service-To-Do</Link>
+                    <Link to="bookedService">Booked Service</Link>
                   </li>
                 </ul>
               </li>
@@ -106,8 +108,10 @@ const NavigationBar = () => {
                     <Link to="manageService">Manage Services</Link>
                   </li>
                   <li>
-                    <Link>Service-To-Do</Link>
+           
+                    <Link to="bookedService">Booked Service</Link>
                   </li>
+       
                 </ul>
               </details>
             </li>}
