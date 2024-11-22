@@ -38,7 +38,7 @@ const ServiceDetails = () => {
     console.log("testing", bookedService);
 
     axios
-      .post("http://localhost:5000/booking", bookedService, {
+      .post("https://radiant-glow-server.vercel.app/booking", bookedService, {
         withCredentials: true,
       })
       .then(function (response) {

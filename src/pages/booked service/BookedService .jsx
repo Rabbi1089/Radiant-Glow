@@ -14,7 +14,7 @@ const BookedService = () => {
   }, [user]);
   const getData = () => {
     axios
-      .get(`http://localhost:5000/bookedService?email=${user?.email}`, {
+      .get(`https://radiant-glow-server.vercel.app/bookedService?email=${user?.email}`, {
         withCredentials: true,
       })
       .then((res) => setBookedService(res.data));
@@ -30,10 +30,10 @@ const BookedService = () => {
               <label></label>
             </th>
             <th>Service Name</th>
+            <th>Provider Name</th>
             <th>Date</th>
-            <th>Location</th>
             <th>Price</th>
-            <th>Action</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -57,8 +57,9 @@ const BookedService = () => {
                   </div>
                 </div>
               </td>
+              <td>{service.serviceProviderName}</td>
               <td>{service.ServiceDate}</td>
-              <td>{service.sArea}</td>
+    
               <td>{service.sPrice}</td>
               <th>
                 <span className=" rounded-lg p-3 text-white btn-sm bg-violet-600 uppercase">

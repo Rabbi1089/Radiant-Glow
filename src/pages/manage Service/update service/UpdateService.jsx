@@ -30,7 +30,7 @@ const UpdateService = () => {
     console.log("handle update clicked", updateService);
 
     axios
-      .put(`http://localhost:5000/update/${service._id}`, updateService, {
+      .put(`https://radiant-glow-server.vercel.app/update/${service._id}`, updateService, {
         withCredentials: true,
       })
       .then(function (response) {

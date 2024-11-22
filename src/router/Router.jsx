@@ -11,6 +11,7 @@ import ManageService from "../pages/manage Service/ManageService";
 import UpdateService from "../pages/manage Service/update service/UpdateService";
 import BookedService from "../pages/booked service/BookedService ";
 import ServiceToDo from "../pages/service to do/ServiceToDo";
+import About from "../pages/about/About";
 
 
 const Router = createBrowserRouter([
@@ -21,6 +22,10 @@ const Router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/about",
+        element: <About ></About>,
       },
       {
         path: "/SignUp",
@@ -50,7 +55,7 @@ const Router = createBrowserRouter([
           </PrivateRouter>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/Services/${params.id}`),
+          fetch(`https://radiant-glow-server.vercel.app/Services/${params.id}`),
       },
       {
         path: "/addService",
@@ -77,7 +82,7 @@ const Router = createBrowserRouter([
         ),
 
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/Services/${params.id}`),
+          fetch(`https://radiant-glow-server.vercel.app/Services/${params.id}`),
       },
     ],
   },

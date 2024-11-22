@@ -73,7 +73,7 @@ const NavigationBar = () => {
               )}
 
               <li>
-                <a>Item 3</a>
+                <Link to="/about">About</Link>
               </li>
             </ul>
           </div>
@@ -119,7 +119,7 @@ const NavigationBar = () => {
             )}
 
             <li>
-              <a>Item 3</a>
+            <Link to="/about">About</Link>
             </li>
           </ul>
         </div>

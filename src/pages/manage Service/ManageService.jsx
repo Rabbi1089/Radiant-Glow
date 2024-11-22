@@ -13,7 +13,7 @@ const ManageService = () => {
 
   const getData = () => {
     axios
-      .get(`http://localhost:5000/myService?email=${user?.email}`, {
+      .get(`https://radiant-glow-server.vercel.app/myService?email=${user?.email}`, {
         withCredentials: true,
       })
       .then((res) => setMyServices(res.data));
@@ -38,7 +38,7 @@ const ManageService = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           axios
-          .delete(`http://localhost:5000/delete/${id}`)
+          .delete(`https://radiant-glow-server.vercel.app/delete/${id}`)
           .then(function (response) {
             console.log(response);
             getData()
@@ -58,7 +58,6 @@ const ManageService = () => {
         ) {
           swalWithBootstrapButtons.fire({
             title: "Cancelled",
-            text: "Your imaginary file is safe :)",
             icon: "error"
           });
         }

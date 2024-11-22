@@ -28,7 +28,7 @@ const AddService = () => {
     };
 
     axios
-      .post("http://localhost:5000/services", service, {
+      .post("https://radiant-glow-server.vercel.app/services", service, {
         withCredentials: true,
       })
       .then(function (response) {

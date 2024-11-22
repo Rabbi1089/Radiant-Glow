@@ -6,7 +6,7 @@ const TrendingService = () => {
     const [services, setservices] = useState([]);
     useEffect(() => {
       const getData = async () => {
-        const { data } = await axios("http://localhost:5000/trendServices");
+        const { data } = await axios("https://radiant-glow-server.vercel.app/trendServices");
         setservices(data);
       };
       getData();
