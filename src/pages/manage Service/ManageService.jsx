@@ -44,7 +44,7 @@ const ManageService = () => {
             getData()
             swalWithBootstrapButtons.fire({
               title: "Deleted!",
-              text: "Your file has been deleted.",
+              text: "Your service has been deleted.",
               icon: "success"
             });
           })
